@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats</title>
+    <style>
+        body{
+            background-color: aliceblue;
+            padding: 2rem;
+        }
+        .chat{
+            background-color: antiquewhite;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        #msg{
+            background-color: rgba(255, 166, 0, 0.662);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--  New chat Route  -->
+    <form action="/chats/new">
+        <button>New Chat</button>
+    </form>
+
+    <!--  Showing all chats  -->
+    <h1>Previous Chats</h1>
+        <% for(chat of chats){ %>
+            <div class="chat">
+            <p> from <i><%= chat.from %></i> to <i><%= chat.to %></i></p>
+            <p id="msg"> <%= chat.msg %> </p>
+
+            <!-- toString() converts the date in string form, split(" ") will split the string based on the space or any parameter specified in the split function, [] is like array indexing ( 0 indexed ), slice can be used to get multiple elements at the same time, join() can be used to join the string again -->
+            <p><%=chat.created_at.toString().split(" ")[4]%> </p>
+            <p><%=chat.created_at.toString().split(" ").slice(0, 4).join(" ")%> </p>
+
+            <!--  Detail chat Route -->
+            <form method="GET" action="/chats/<%=chat._id%>">
+                <button>Show Details</button>
+            </form>
+            
+            <!--  Edit chat Route -->
+            <form method="POST" action="/chats/<%=chat._id%>/edit">
+                <button>Edit</button>
+            </form> <br>
+
+            <!--  Delete chat Route -->
+            <form method="POST" action="/chats/<%=chat._id%>/?_method=DELETE">
+                <button>Delete</button>
+            </form>
+            </div>
+            <br>
+        <% } %>
+</body>
+</html>

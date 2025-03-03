@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  Showing all chats  -->
+    <h1>Detail Chat</h1>
+            <div class="chat">
+            <p> from <i><%= detailedChat.from %></i> to <i><%= detailedChat.to %></i></p>
+            <p id="msg"> <%= detailedChat.msg %> </p>
+            <p><%=detailedChat.created_at%></p>
+
+            <!--  Edit chat Route -->
+            <form method="POST" action="/chats/<%=detailedChat._id%>/edit">
+                <button>Edit</button>
+            </form> <br>
+
+            <!--  Delete chat Route -->
+            <form method="POST" action="/chats/<%=detailedChat._id%>/?_method=DELETE">
+                <button>Delete</button>
+            </form>
+            </div>
+            <br>
+</body>
+</html>
